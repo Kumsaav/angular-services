@@ -1,0 +1,67 @@
+<html ng-app="contactApp">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <h3>Contacts App</h3>
+
+    <div class="page-header" ng-controller="HeaderCtrl as header">
+       <h2> {{header.appTitle}} </h2>
+    </div>
+
+    <div class="container" ng-controller="contactCtrl as ctrl">
+
+        <div class="row">
+            <ul class="list-group">
+                <li ng-repeat="contact in ctrl.contacts" class="list-group-item" ng-click="ctrl.selectContact($index)">
+                    <span>{{contact.name.first + " " + contact.name.last}}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                       <img ng-src="{{ctrl.selectedContact.picture.large}}"></img>
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h5 class="media-heading">{{ctrl.selectedContact.name.first + " " + ctrl.selectedContact.name.last}}</h4>
+
+                    <div>
+                        <p>
+                            <h6>Location
+                        </p>
+                        <p>
+                            {{ctrl.selectedContact.location.street + " " + ctrl.selectedContact.location.city + " " + ctrl.selectedContact.location.state}}
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <h6>Phone
+                        </p>
+                        <p>
+                            {{ctrl.selectedContact.cell}}
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-header" ng-controller="FooterCtrl as footer">
+       <h2> {{footer.appTitle}} </h2>
+    </div>
+
+</body>
+
+</html>

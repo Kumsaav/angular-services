@@ -5,26 +5,46 @@ app.controller("HeaderCtrl", headerCtrl);
 
 app.controller("FooterCtrl", footerCtrl);
 
-//app.value("appTitleSvc", "My Contact Application");
-
 app.constant("appObjSvc", {
     "Title" : "My Contact App",
     "Author" : "Saurav",
     "version" : "1.0" 
 });
 
-app.value("appObjFunc", function(){
-    console.log("Hello World!!");
-});
+app.value("appTitleSvc", "My New Contact Application");
+// app.value("appObjFunc", prepareConfig());
 
-function headerCtrl(appObjSvc, appObjFunc){
-    this.appTitle=appObjSvc.Title;
-    appObjFunc();
+app.value ("ApplicationNameSvc", "My New Contacts App");
+
+function prepareConfig(ApplicationNameSvc){
+    var obj = {};
+    obj.name = ApplicationNameSvc;
+    obj.age = "34";
+    return obj;
 }
 
-function footerCtrl(appObjSvc, appObjFunc){
+function AppConfig(appTitleSvc){
+     this.name = appTitleSvc;
+     this.title = "Something";
+}
+
+app.factory("appDataObjFactory", prepareConfig); // prepareConfig();
+app.service("appDataServiceSvc", AppConfig); // new AppConfig();
+
+/*app.factory("appDataObjFactory", function(){
+    return "This is an example of factory service. It can return any object";
+});*/
+
+function headerCtrl(appObjSvc, appDataObjFactory, appDataServiceSvc){
     this.appTitle=appObjSvc.Title;
-    appObjFunc();
+    console.log(appDataObjFactory.name);
+    console.log(appDataServiceSvc.name);
+   
+}
+
+function footerCtrl(appObjSvc){
+    this.appTitle=appObjSvc.Title;
+   
 }
 
 function contactCtrl() {
